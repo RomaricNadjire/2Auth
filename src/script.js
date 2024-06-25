@@ -9,7 +9,7 @@ inputs.forEach((input, index) => {
 
         if(currentInput.value.length>1){
             currentInput.value = input.value.slice(-1);
-            if(index<inputs.length-1){
+            if(index < inputs.length-1){
                 nextinput.focus();
             }else{
                 inputs[0].focus()
