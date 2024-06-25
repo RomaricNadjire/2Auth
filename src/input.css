@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    @apply duration-500;
+}
+
+input[type='number']::-webkit-inner-spin-button{
+    display: none;
+}
+
+input[type='number']{
+    @apply text-center focus:border-cyan-400 focus:border-2
+}
+
+input[type='submit'].active{
+    @apply bg-blue-500 pointer-events-auto
+}
+
+input[type='submit'].active:hover{
+    @apply bg-blue-600
+}
