@@ -38,6 +38,7 @@ inputs.forEach((input, index) => {
         inputs.forEach(input => {
             if (input.value === '') {
                 tousNonNuls = false;
+                return;
             }
         });
 
