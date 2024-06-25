@@ -50,6 +50,7 @@ function checkStat() {
     });
 
     tousNonNuls ? submitBtn.classList.add('active') : submitBtn.classList.remove('active');
+    tousNonNuls ?  submitBtn.removeAttribute('disabled') :  submitBtn.setAttribute('disabled', true);
 }
 
 function handleOnPasteOtp(e) {
