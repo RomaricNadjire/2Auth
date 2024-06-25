@@ -1,7 +1,8 @@
 const inputs = document.querySelectorAll('input[type="number"]');
-const submit = document.querySelector('input[type="submit"');
+const submitBtn = document.querySelector('input[type="submit"]');
 
 inputs.forEach((input, index) => {
+    input.addEventListener("paste", handleOnPasteOtp);
     input.addEventListener('keyup', (e) => {
         const currentInput = input,
             nextinput = input.nextElementSibling,
@@ -11,7 +12,7 @@ inputs.forEach((input, index) => {
             currentInput.value = input.value.slice(-1);
             if (index < inputs.length - 1) {
                 nextinput.focus();
-            } 
+            }
             // else {
             //     inputs[0].focus()
             // }
@@ -32,18 +33,50 @@ inputs.forEach((input, index) => {
                 }
             });
         }
-
-        let tousNonNuls = true;
-
-        inputs.forEach(input => {
-            if (input.value === '') {
-                tousNonNuls = false;
-                return;
-            }
-        });
-
-        tousNonNuls?submit.classList.add('active'):submit.classList.remove('active');
+        checkStat();
     });
 });
 
 window.addEventListener('load', () => inputs[0].focus())
+
+function checkStat() {
+    let tousNonNuls = true;
+
+    inputs.forEach(input => {
+        if (input.value === '') {
+            tousNonNuls = false;
+            return;
+        }
+    });
+
+    tousNonNuls ? submitBtn.classList.add('active') : submitBtn.classList.remove('active');
+}
+
+function handleOnPasteOtp(e) {
+    const data = e.clipboardData.getData("text");
+    const value = data.split("");
+    if (value.length === inputs.length) {
+        inputs.forEach((input, index) => (
+            input.value = value[index]
+        ));
+        submit();
+    }  
+    for(let i=0; i<value.length; i++){
+        inputs[i].removeAttribute("disabled"),
+        inputs[i].focus()
+    }
+    checkStat();
+}
+
+function submit() {
+    console.log("submitBtnting...");
+    // 👇 Entered OTP
+    let otp = "";
+    inputs.forEach((input) => {
+        otp += input.value;
+        input.disabled = true;
+        input.classList.add("disabled");
+    });
+    console.log(otp);
+    // 👉 Call API below
+}
