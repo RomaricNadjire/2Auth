@@ -37,7 +37,13 @@ inputs.forEach((input, index) => {
     });
 });
 
-window.addEventListener('load', () => inputs[0].focus())
+window.addEventListener('load', () => {
+    inputs[0].focus()
+    document.getElementById('form').addEventListener('submit', function(e){
+        e.preventDefault();
+        submit();
+    })
+})
 
 function checkStat() {
     let tousNonNuls = true;
@@ -60,7 +66,6 @@ function handleOnPasteOtp(e) {
         inputs.forEach((input, index) => (
             input.value = value[index]
         ));
-        submit();
     }  
     for(let i=0; i<value.length; i++){
         inputs[i].removeAttribute("disabled"),
@@ -71,13 +76,10 @@ function handleOnPasteOtp(e) {
 
 function submit() {
     console.log("submitBtnting...");
-    // 👇 Entered OTP
     let otp = "";
     inputs.forEach((input) => {
         otp += input.value;
-        input.disabled = true;
-        input.classList.add("disabled");
+        // input.disabled = true;
+        location.reload()
     });
-    console.log(otp);
-    // 👉 Call API below
 }
